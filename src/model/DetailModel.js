@@ -28,12 +28,14 @@ class DetailModel{
         let where = {
             [Op.or]: keyword?IsKeyword:isAnLo,
         }
-        
-        return await DetailSchema.findAll({
+
+        let data = await DetailSchema.findAll({
             attributes: ['symbol', 'address','name', 'decimals','logo'],
             limit : 20,
             where:(keyword || location || language)?where:{}
         })
+
+        return data
     }
 
 
@@ -42,7 +44,7 @@ class DetailModel{
      * @returns {Promise<*>}
      */
      static async FindDetail(address,location,language) {
-        
+
         let data = await DetailSchema.findAll({
             attributes: {exclude: ['id','createdAt','updatedAt']},
             // attributes: ['symbol', 'address','name', 'decimals','logo'],

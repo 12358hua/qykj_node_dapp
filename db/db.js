@@ -8,6 +8,10 @@ const Sequelize = require('sequelize');
  * 第二个参数 root      数据库名字
  * 第三个参数 password  数据库密码
  */
+// console.log(process.argv.splice(2)+' 获取到项目启动的参数，从第二个开始就是dev后面的参数')
+var data = process.argv.splice(2)
+console.log(data)
+
 const sequelize = new Sequelize('node-dappsql', 'root', '12358Hua', {
     host: 'localhost',
     dialect: 'mysql',
