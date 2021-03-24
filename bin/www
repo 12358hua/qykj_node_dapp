@@ -11,11 +11,8 @@ var http = require('http');
 /**
  * Get port from environment and store in Express.
  */
-
-var port = normalizePort(process.env.PORT || '3008');
-console.log('服务器启动成功：localhost:'+port)
-// process.argv.splice(2)
-// app.set('port', port);
+const ports = process.env.npm_package_scripts_dev.substr(17,4);
+var port = normalizePort(process.env.PORT || ports);
 
 /**
  * Create HTTP server.
