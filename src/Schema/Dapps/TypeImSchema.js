@@ -27,6 +27,16 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.TEXT,
             field: 'des',
             allowNull: false,
+        },
+        logo: {
+            type: DataTypes.STRING(600),
+            field: 'logo',
+            allowNull: false
+        },
+        isIndex: {
+            type: DataTypes.INTEGER,
+            field: 'isIndex',
+            allowNull: false,
         }
     }, {
         // 如果为 true 则表的名称和 model 相同，即 user

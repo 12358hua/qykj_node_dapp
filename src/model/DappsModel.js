@@ -23,7 +23,7 @@ class DappsModel{
                 [Op.or]: [
                     { location: location?location:'' },
                     { language: language?language:'' }
-                ]    
+                ]
             }:''
         })
 
@@ -33,7 +33,7 @@ class DappsModel{
                 [Op.or]: [
                     { location: location?location:'' },
                     { language: language?language:'' }
-                ]    
+                ]
             }:''
         })
 
@@ -44,7 +44,8 @@ class DappsModel{
 
                 let dataItem = await TypeImSchema.findAll({
                     attributes: ['name', 'url','des','logo'],
-                    where: { category_id: CategoryData[i].category_id }
+                    where: { category_id: CategoryData[i].category_id,isIndex:1 },
+                    limit:8
                 })
 
                 itemData.push({
