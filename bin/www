@@ -11,7 +11,16 @@ var http = require('http');
 /**
  * Get port from environment and store in Express.
  */
-const ports = process.env.npm_package_scripts_dev.substr(17,4);
+// const lifecyclePorts = process.env.npm_lifecycle_script.slice(37,41);
+// npm_lifecycle_script: './node_modules/.bin/nodemon bin/www "3009" "node-dappsql" "root" "12345"',
+// const ports = process.env.npm_lifecycle_script.slice(37,41);
+
+const lifecyclePorts = process.env.npm_lifecycle_script; //linux
+const packagePorts = process.env.npm_package_scripts_dev; //windwos
+
+console.log('linux环境：'+lifecyclePorts+' windows环境：'+packagePorts)
+const ports = lifecyclePorts.length>10?lifecyclePorts.slice(37,41):packagePorts.slice(17,21);
+
 var port = normalizePort(process.env.PORT || ports);
 
 /**
