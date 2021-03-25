@@ -32,6 +32,9 @@ class DetailModel{
         let data = await DetailSchema.findAll({
             attributes: ['symbol', 'address','name', 'decimals','logo'],
             limit : 20,
+            order: [
+                ['sort', 'ASC'],
+            ],
             where:(keyword || location || language)?where:{}
         })
 

@@ -13,14 +13,14 @@ class Detail {
         let keyword = ctx.request.query.keyword;
         let location = ctx.request.header.location;
         let language = ctx.request.header.language;
-        
+
         if(ctx.request.url.indexOf('/tokens/search') >= 0){
             if(isNull(keyword)){
                 ctx.body = new ErrorModel(400,'缺少keyword字段值',null)
                 return;
             }
         }
-        
+
         try {
             const data = await DetailModel.FindSearchDetailList(keyword,location,language);
 
@@ -46,7 +46,7 @@ class Detail {
           if(isNull(address)){
             ctx.body = new ErrorModel(400,'缺少address字段值',null)
           }
-          
+
           try {
               const data = await DetailModel.FindDetail(address,location,language);
               ctx.response.status = 200;
