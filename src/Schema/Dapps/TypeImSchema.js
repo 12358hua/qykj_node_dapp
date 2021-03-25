@@ -1,6 +1,6 @@
 const moment = require('moment');
 module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('type_item', {
+    return sequelize.define('dapps_type_list', {
         id: {
             type: DataTypes.UUID,
             defaultValue: sequelize.UUIDV1, // 或 Sequelize.UUIDV1

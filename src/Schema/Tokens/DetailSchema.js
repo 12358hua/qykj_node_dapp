@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('detail', {
-        id: { 
+    return sequelize.define('tokens', {
+        id: {
             type: DataTypes.UUID,
             defaultValue: sequelize.UUIDV1, // 或 Sequelize.UUIDV1
             // allowNull: false, //将 allowNull 设置为 false 将为该列添加 NOT NULL
