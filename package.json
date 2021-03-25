@@ -22,6 +22,7 @@
     "koa-views": "^6.2.0",
     "moment": "^2.29.1",
     "mysql2": "^2.2.5",
+    "os": "^0.1.1",
     "sequelize": "^5.22.4"
   },
   "devDependencies": {

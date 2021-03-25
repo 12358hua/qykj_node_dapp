@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('demo:server');
 var http = require('http');
+var os = require('os');
 
 /**
  * Get port from environment and store in Express.
@@ -17,9 +18,12 @@ var http = require('http');
 
 const lifecyclePorts = process.env.npm_lifecycle_script; //linux
 const packagePorts = process.env.npm_package_scripts_dev; //windwos
+var networkInterfaces = os.platform();
 
+console.log(networkInterfaces)
 console.log('linux环境：'+lifecyclePorts+' windows环境：'+packagePorts)
-const ports = lifecyclePorts.length>10?lifecyclePorts.slice(37,41):packagePorts.slice(17,21);
+
+const ports = /^win/.test(networkInterfaces)?packagePorts.slice(17,21):lifecyclePorts.slice(37,41);
 
 var port = normalizePort(process.env.PORT || ports);
 
