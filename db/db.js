@@ -15,7 +15,7 @@ console.log(data)
 // 121.43.131.180  localhost
 // data[1], data[2], data[3]
 // npm run dev 3009 huobiecochainmainnet root 12358Hua
-// npm run dev 3009 ethereummainnet root 12358Hua
+// npm run dev 3008 ethereummainnet root 12358Hua
 const sequelize = new Sequelize(data[1], data[2], data[3], {
     host: 'localhost',
     dialect: 'mysql',

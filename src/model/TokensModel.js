@@ -150,6 +150,7 @@ class DetailModel {
      * @returns {Promise<*>}
      */
     static async FindTokensDetail(address, location, language) {
+        console.log(address, location, language)
 
         let isLocation = {
             address:address,
@@ -175,22 +176,46 @@ class DetailModel {
                 attributes: ['name','desc']
             }],
         })
-
+        let params = null
         if(data != null){
-            data.dataValues.name = data.dataValues.tokens_blog_language.name;
-            data.dataValues.desc = data.dataValues.tokens_blog_language.desc;
-            delete data.dataValues.tokens_blog_language;
-            data.dataValues.links = {
-                discord:data.dataValues.discord,
-                twitter:data.dataValues.twitter,
-                medium:data.dataValues.medium,
-            }
-            delete data.dataValues.discord;
-            delete data.dataValues.twitter;
-            delete data.dataValues.medium;
-        }
+            params = [{
+                "symbol": data.dataValues.symbol,
+                "address": data.dataValues.address,
+                "name": data.dataValues.tokens_blog_language.name,
+                "decimals": data.dataValues.decimals,
+                "logo": data.dataValues.logo,
+                "email": data.dataValues.email,
+                "whitepaper": data.dataValues.whitepaper,
+                "website": data.dataValues.website,
+                "state": data.dataValues.state,
+                "published_on": data.dataValues.published_on,
+                "links": {
+                    "discord": data.dataValues.discord,
+                    "twitter": data.dataValues.twitter,
+                    "medium": data.dataValues.medium
+                }
+            }]
 
-        return data
+            // data.dataValues.name = data.dataValues.tokens_blog_language.name;
+            // data.dataValues.desc = data.dataValues.tokens_blog_language.desc;
+            // delete data.dataValues.tokens_blog_language;
+            // data.dataValues.overview = {
+            //     "en": '1232',
+            //     "zh": '中午'
+            // }
+            // data.dataValues.links = {
+            //     discord:data.dataValues.discord,
+            //     twitter:data.dataValues.twitter,
+            //     medium:data.dataValues.medium,
+            // }
+            // delete data.dataValues.desc;
+            // delete data.dataValues.discord;
+            // delete data.dataValues.twitter;
+            // delete data.dataValues.medium;
+        }
+        console.log(params)
+
+        return params
     }
 }
 

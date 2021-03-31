@@ -18,7 +18,7 @@ Routers.get('/index', Dapps.DappsList);
 /**
  * get
  * 获取dapps列表  dapps/search
- * @param {
+ * @params {
  *     keyword:查询条件：keyword不传默认拿到20条所有状态数据(可选)
  * }
  * @header {
@@ -32,7 +32,7 @@ Routers.get('/search', Dapps.DappsSearchList);
 /**
  * post
  * 修改状态是否为热门 dapps/updateIndex
- * @param {
+ * @params {
  *     id:代币id（必须）
  *     isIndex:大于1为开启，小于为关闭，不传默认所有状态（必须）
  * }
