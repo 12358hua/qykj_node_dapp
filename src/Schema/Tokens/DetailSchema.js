@@ -17,11 +17,6 @@ module.exports = function (sequelize, DataTypes) {
             field: 'address',
             allowNull: false
         },
-        name: {
-            type: DataTypes.STRING(128),
-            field: 'name',
-            allowNull: false
-        },
         decimals: {
             type: DataTypes.INTEGER,
             field: 'decimals',
@@ -30,16 +25,6 @@ module.exports = function (sequelize, DataTypes) {
         logo: {
             type: DataTypes.STRING(1000),
             field: 'logo', //你可以通过 'field' 属性指定自定义列名称
-            allowNull: false
-        },
-        en: {
-            type: DataTypes.TEXT,
-            field: 'en',
-            allowNull: false
-        },
-        zh: {
-            type: DataTypes.TEXT,
-            field: 'zh',
             allowNull: false
         },
         email: {

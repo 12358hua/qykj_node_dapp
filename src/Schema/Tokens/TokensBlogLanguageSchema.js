@@ -1,31 +1,33 @@
-const moment = require('moment');
 const Sequelize = require('sequelize');
+const moment = require('moment');
 module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('banners', {
+    return sequelize.define('tokens_blog_language', {
         id: {
             type: DataTypes.UUID,
             defaultValue: Sequelize.UUIDV1, // 或 Sequelize.UUIDV1
+            allowNull: false, //将 allowNull 设置为 false 将为该列添加 NOT NULL
             primaryKey: true, //true继续阅读有关主键的更多信息
         },
-        image: {
-            type: DataTypes.STRING(255),
-            field: 'image', //你可以通过 'field' 属性指定自定义列名称
-            allowNull: false
-        },
-        url: {
-            type: DataTypes.STRING(255),
-            field: 'url',
-            allowNull: false
-        },
-        location: {
+        tokens_id: {
             type: DataTypes.STRING(128),
-            field: 'location',
-            allowNull: false
+            field: 'tokens_id', //你可以通过 'field' 属性指定自定义列名称
+            comment:'关联token id',
+            allowNull: false,
         },
-        language: {
-            type: DataTypes.STRING(128),
+        name: {
+            type: DataTypes.STRING(255),
+            field: 'name', //你可以通过 'field' 属性指定自定义列名称
+            comment:'名称语言',
+        },
+        desc: {
+            type: DataTypes.TEXT,
+            field: 'desc',
+            comment:'简介语言',
+        },
+        language:{
+            type: DataTypes.STRING(60),
             field: 'language',
-            allowNull: false
+            comment:'语言类型',
         },
         createdAt: {
             type: DataTypes.DATE,

@@ -7,7 +7,7 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
 const DappsRouter = require('./routes/DappsRouter')
-const DetailRouter = require('./routes/DetailRouter')
+const TokensRouter=require('./routes/TokensRouter')
 
 // error handler
 onerror(app)
@@ -21,7 +21,7 @@ app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
-  extension: 'ejs' 
+  extension: 'ejs'
 }))
 
 // logger
@@ -34,7 +34,8 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(DappsRouter.routes(), DappsRouter.allowedMethods())
-app.use(DetailRouter.routes(), DetailRouter.allowedMethods())
+app.use(TokensRouter.routes(),TokensRouter.allowedMethods())
+
 
 // error-handling
 app.on('error', (err, ctx) => {

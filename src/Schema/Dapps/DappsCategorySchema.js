@@ -1,31 +1,37 @@
 const moment = require('moment');
 const Sequelize = require('sequelize');
 module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('banners', {
+    return sequelize.define('dapps_category', {
         id: {
             type: DataTypes.UUID,
             defaultValue: Sequelize.UUIDV1, // 或 Sequelize.UUIDV1
-            primaryKey: true, //true继续阅读有关主键的更多信息
+            allowNull: false, //将 allowNull 设置为 false 将为该列添加 NOT NULL
+            primaryKey: true
         },
-        image: {
+        identifier: {
             type: DataTypes.STRING(255),
-            field: 'image', //你可以通过 'field' 属性指定自定义列名称
-            allowNull: false
+            field: 'identifier',
+            allowNull: false,
+            // references: {
+            //     model: 'dapps_category_language',
+            //     key: 'category_id'
+            // },
+            comment:'语言Id'
         },
-        url: {
-            type: DataTypes.STRING(255),
-            field: 'url',
-            allowNull: false
+        sort: {
+            type: DataTypes.INTEGER,
+            field: 'sort', //你可以通过 'field' 属性指定自定义列名称
+            comment:'自增 (可做普通排序使用)',
+        },
+        isIndex: {
+            type: DataTypes.INTEGER,
+            field: 'isIndex',
+            comment:'是否热门 (null：否，大于等于0: 是)'
         },
         location: {
-            type: DataTypes.STRING(128),
+            type: DataTypes.STRING(3000),
             field: 'location',
-            allowNull: false
-        },
-        language: {
-            type: DataTypes.STRING(128),
-            field: 'language',
-            allowNull: false
+            comment:'地区  为null是所有地区（数据格式：‘地区1，地区2’）'
         },
         createdAt: {
             type: DataTypes.DATE,
@@ -44,9 +50,6 @@ module.exports = function (sequelize, DataTypes) {
             }
         }
     }, {
-        // 如果为 true 则表的名称和 model 相同，即 user
-        // 为 false MySQL创建的表名称会是复数 users
-        // 如果指定的表名称本就是复数形式则不变
         freezeTableName: true
     })
 }

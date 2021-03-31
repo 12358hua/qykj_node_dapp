@@ -1,31 +1,33 @@
 const moment = require('moment');
 const Sequelize = require('sequelize');
 module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('banners', {
+    return sequelize.define('dapps_blog_language', {
         id: {
             type: DataTypes.UUID,
             defaultValue: Sequelize.UUIDV1, // 或 Sequelize.UUIDV1
-            primaryKey: true, //true继续阅读有关主键的更多信息
+            allowNull: false, //将 allowNull 设置为 false 将为该列添加 NOT NULL
+            primaryKey: true,
         },
-        image: {
+        blog_id: {
             type: DataTypes.STRING(255),
-            field: 'image', //你可以通过 'field' 属性指定自定义列名称
-            allowNull: false
+            field: 'blog_id',
+            allowNull: false, //将 allowNull 设置为 false 将为该列添加 NOT NULL
+            comment:'关联blog',
+            // unique : true,
+            // primaryKey: true,
         },
-        url: {
+        name: {
             type: DataTypes.STRING(255),
-            field: 'url',
-            allowNull: false
+            field: 'name', //你可以通过 'field' 属性指定自定义列名称
         },
-        location: {
-            type: DataTypes.STRING(128),
-            field: 'location',
-            allowNull: false
+        des: {
+            type: DataTypes.TEXT,
+            field: 'des', //你可以通过 'field' 属性指定自定义列名称
         },
-        language: {
+        language_code: {
             type: DataTypes.STRING(128),
-            field: 'language',
-            allowNull: false
+            field: 'language_code',
+            comment:'（指定语言）'
         },
         createdAt: {
             type: DataTypes.DATE,
@@ -44,9 +46,6 @@ module.exports = function (sequelize, DataTypes) {
             }
         }
     }, {
-        // 如果为 true 则表的名称和 model 相同，即 user
-        // 为 false MySQL创建的表名称会是复数 users
-        // 如果指定的表名称本就是复数形式则不变
         freezeTableName: true
     })
 }
