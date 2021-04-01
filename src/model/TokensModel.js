@@ -52,7 +52,7 @@ class DetailModel {
         });
         if(blpg_data.length > 0){ //如果tokenblog存在，直接再做一次联查
             blpg_data = await TokensBlogSchema.findAll({
-                attributes: ['id','symbol', 'address', 'decimals', 'logo'],
+                attributes: ['symbol', 'address', 'decimals', 'logo'],
                 limit:20,
                 order: [['standard_sort', 'ASC']],
                 where: TokensBlogWhere,
@@ -61,13 +61,13 @@ class DetailModel {
                     where: {
                         language: language ? language : 'en'
                     },
-                    attributes: ['name','desc']
+                    attributes: ['name']
                 }]
             })
             return languageForPush(blpg_data)
         }else{
             blpg_language = await TokensBlogLanguageSchema.findAll({
-                attributes: ['name','desc'],
+                attributes: ['name'],
                 limit:20,
                 where: languageWhere,
             })
@@ -80,7 +80,7 @@ class DetailModel {
                 targetKey: 'identifier',
             });
             blpg_language = await TokensBlogLanguageSchema.findAll({
-                attributes: ['name','desc'],
+                attributes: ['name'],
                 limit:20,
                 where: languageWhere,
                 include: [{ //连表查
@@ -91,7 +91,7 @@ class DetailModel {
                             [Op.substring]: location?location:'CN',
                         }
                     },
-                    attributes: ['id','symbol', 'address', 'decimals', 'logo'],
+                    attributes: ['symbol', 'address', 'decimals', 'logo'],
                 }]
             })
             return languageForPush(blpg_language)
@@ -102,32 +102,31 @@ class DetailModel {
      * 查询token列表
      * @returns {Promise<*>}
      */
-    static async FindTokensList(hot, location, language) {
-
+    static async FindTokensList(url,location, language) {
         TokensBlogSchema.belongsTo(TokensBlogLanguageSchema, {
             foreignKey: 'identifier',
             targetKey: 'tokens_id',
         });
-        // console.log(hot)
         let where = {
             location:{
                 [Op.substring]: location?location:'CN',
             },
             hot_sort:{
-                [Op.gte]: typeof hot == 'string'?parseInt(hot):hot//大于0
+                [Op.gt]: 0 //大于0
             }
         }
 
+        let hotlistSort = [['hot_sort','ASC']]; // ASC升序 | DESC降序;
+        let standardSort = [['standard_sort', 'ASC']];
+
         let data = await TokensBlogSchema.findAll({
-            attributes: [seq.col('tokens_blog_language.name'),seq.col('tokens_blog_language.desc'),'id','symbol', 'address', 'hot_sort','decimals', 'logo'],
+            attributes: [seq.col('tokens_blog_language.name'),'symbol', 'address', 'decimals', 'logo'],
             limit: 20,
-            order: [
-                ['standard_sort', 'ASC'], // ASC升序 | DESC降序;
-            ],
-            where: hot?where:{
+            order: url == 'standard'?standardSort:hotlistSort,
+            where: url == 'hotlist'?where:{
                 location:{
                     [Op.substring]: location?location:'CN',
-                }
+                },
             },
             include: [{ //连表查
                 model: TokensBlogLanguageSchema,
@@ -195,23 +194,6 @@ class DetailModel {
                     "medium": data.dataValues.medium
                 }
             }]
-
-            // data.dataValues.name = data.dataValues.tokens_blog_language.name;
-            // data.dataValues.desc = data.dataValues.tokens_blog_language.desc;
-            // delete data.dataValues.tokens_blog_language;
-            // data.dataValues.overview = {
-            //     "en": '1232',
-            //     "zh": '中午'
-            // }
-            // data.dataValues.links = {
-            //     discord:data.dataValues.discord,
-            //     twitter:data.dataValues.twitter,
-            //     medium:data.dataValues.medium,
-            // }
-            // delete data.dataValues.desc;
-            // delete data.dataValues.discord;
-            // delete data.dataValues.twitter;
-            // delete data.dataValues.medium;
         }
         console.log(params)
 
@@ -223,11 +205,9 @@ const languageForPush = function(data){
     let languages = []
     for(let k=0;k<data.length;k++){
         languages.push({
-            id:data[k].id?data[k].id:data[k].tokens_blog.id,
             symbol:data[k].symbol?data[k].symbol:data[k].tokens_blog.symbol,
             address:data[k].address?data[k].address:data[k].tokens_blog.address,
             name:data[k].name?data[k].name:data[k].tokens_blog_language.name,
-            desc:data[k].desc?data[k].desc:data[k].tokens_blog_language.desc,
             decimals:data[k].decimals?data[k].decimals:data[k].tokens_blog.decimals,
             logo:data[k].logo?data[k].logo:data[k].tokens_blog.logo,
         })

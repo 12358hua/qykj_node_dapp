@@ -37,7 +37,7 @@ class Tokens {
     static
     async TokensSearch(ctx) {
         let keyword = ctx.request.query.keyword;
-        let hot = ctx.request.query.hot;
+        // let hot = ctx.request.query.hot;
         let location = ctx.request.header.location;
         let language = ctx.request.header.language;
 
@@ -50,8 +50,9 @@ class Tokens {
 
         try {
             let data = null;
+            let usl = ctx.request.url.indexOf('/tokens/hotlist') >= 0?'hotlist':'standard';
             if(ctx.request.url.indexOf('/tokens/hotlist') >= 0 || ctx.request.url.indexOf('/tokens/standard') >= 0){
-                data = await TokensModel.FindTokensList(hot,location,language);
+                data = await TokensModel.FindTokensList(usl,location,language);
             }else{
                 data = await TokensModel.FindTokenKeyword(keyword,location,language);
             }
