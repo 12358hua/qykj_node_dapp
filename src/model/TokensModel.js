@@ -41,7 +41,7 @@ class DetailModel {
 
         let blpg_language = []//语言language
         let blpg_data = await TokensBlogSchema.findAll({ //先查一次tokenBlog
-            attributes: ['symbol', 'address'],
+            attributes: ['protocol','symbol', 'address'],
             limit:20,
             where: TokensBlogWhere,
         })
@@ -52,7 +52,7 @@ class DetailModel {
         });
         if(blpg_data.length > 0){ //如果tokenblog存在，直接再做一次联查
             blpg_data = await TokensBlogSchema.findAll({
-                attributes: ['symbol', 'address', 'decimals', 'logo'],
+                attributes: ['protocol','symbol', 'address', 'decimals', 'logo'],
                 limit:20,
                 order: [['standard_sort', 'ASC']],
                 where: TokensBlogWhere,
@@ -91,7 +91,7 @@ class DetailModel {
                             [Op.substring]: location?location:'CN',
                         }
                     },
-                    attributes: ['symbol', 'address', 'decimals', 'logo'],
+                    attributes: ['protocol','symbol', 'address', 'decimals', 'logo'],
                 }]
             })
             return languageForPush(blpg_language)
@@ -120,7 +120,7 @@ class DetailModel {
         let standardSort = [['standard_sort', 'ASC']];
 
         let data = await TokensBlogSchema.findAll({
-            attributes: [seq.col('tokens_blog_language.name'),'symbol', 'address', 'decimals', 'logo'],
+            attributes: [seq.col('tokens_blog_language.name'),'protocol','symbol', 'address', 'decimals', 'logo'],
             limit: 20,
             order: url == 'standard'?standardSort:hotlistSort,
             where: url == 'hotlist'?where:{
@@ -178,6 +178,7 @@ class DetailModel {
         let params = null
         if(data != null){
             params = [{
+                "protocol": data.dataValues.protocol,
                 "symbol": data.dataValues.symbol,
                 "address": data.dataValues.address,
                 "name": data.dataValues.tokens_blog_language.name,
@@ -205,6 +206,7 @@ const languageForPush = function(data){
     let languages = []
     for(let k=0;k<data.length;k++){
         languages.push({
+            protocol:data[k].protocol?data[k].protocol:data[k].tokens_blog.protocol,
             symbol:data[k].symbol?data[k].symbol:data[k].tokens_blog.symbol,
             address:data[k].address?data[k].address:data[k].tokens_blog.address,
             name:data[k].name?data[k].name:data[k].tokens_blog_language.name,

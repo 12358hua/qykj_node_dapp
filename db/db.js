@@ -11,13 +11,13 @@ const Sequelize = require('sequelize');
 // console.log(process.argv.splice(2)+' 获取到项目启动的参数，从第二个开始就是dev后面的参数')
 var data = process.argv.splice(2)
 console.log(data)
-// npm run dev 3008 node-dappsql root 12345
 // 121.43.131.180  localhost
 // data[1], data[2], data[3]
-// npm run dev 3009 huobiecochainmainnet root 12358Hua
-// npm run dev 3008 ethereummainnet root 12358Hua
+// npm run dev 3009 HuobiEcoChainMainNet root 12358Hua
+// npm run dev 3008 EthereumMainNet root 12358Hua
+// npm run dev 3009 BoundaryNetwork root 12358Hua
 const sequelize = new Sequelize(data[1], data[2], data[3], {
-    host: 'localhost',
+    host: '121.43.131.180',
     dialect: 'mysql',
     operatorsAliases: 0, //0为false,1为true，否则会弹出警告
     dialectOptions: {

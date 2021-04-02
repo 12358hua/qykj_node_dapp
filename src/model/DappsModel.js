@@ -17,8 +17,44 @@ const { isNull } = require('../../utils/Regular')
 // DappsCategorySchema.sync({force: true});
 // BlogSchema.sync({force: true});
 
-
 class DappsModel{
+    /**
+     * 获取dapps热门
+     * @returns {Promise<*>}
+     */
+    static async DappHotlist(location,language) {
+        BlogSchema.belongsTo(BlogLanguageSchema, {foreignKey: 'identifier', targetKey: 'blog_id' });
+
+        // console.log([CategoryData[i].id])
+        let data = await BlogSchema.findAll({
+            attributes: [seq.col('dapps_blog_language.name'),seq.col('dapps_blog_language.des'),'url','logo'],
+            order: [['sort', 'ASC']],
+            where: {
+                location:{
+                    [Op.substring]: location?location:'CN',
+                },
+                isIndex:{
+                    [Op.gt]:0 //大于0
+                }
+            },
+            limit:6,
+            include: [{ //连表查
+                model: BlogLanguageSchema,
+                where: {
+                    language_code: language?language:'en'
+                },
+                attributes: ['name']
+            }],
+            raw:true
+        })
+
+        data.forEach((item)=>{
+            delete item['dapps_blog_language.name']
+        })
+
+        return data
+    }
+
     /**
      * 修改状态是否为热门
      * @returns {Promise<*>}

@@ -16,6 +16,16 @@ const Routers = new Router({
 Routers.get('/index', Dapps.DappsList);
 
 /**
+ * 查询 dapps/hotlist
+ * get
+ * @params{
+ *     location:string, 必须，不传默认为cn
+ *     language:string  必须,不传默认为en
+ * }
+ */
+Routers.get('/hotlist', Dapps.DappHotlist);
+
+/**
  * get
  * 获取dapps列表  dapps/search
  * @params {

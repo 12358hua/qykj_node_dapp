@@ -25,6 +25,11 @@ module.exports = function (sequelize, DataTypes) {
             field: 'hot_sort',
             comment:' 是否热门 (null：否，大于等于0: 是)',
         },
+        protocol: {
+            type: DataTypes.STRING(128),
+            field: 'protocol', //你可以通过 'field' 属性指定自定义列名称
+            comment:'协议名',
+        },
         symbol: {
             type: DataTypes.STRING(60),
             field: 'symbol', //你可以通过 'field' 属性指定自定义列名称
