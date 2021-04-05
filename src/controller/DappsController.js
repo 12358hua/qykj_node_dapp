@@ -11,6 +11,7 @@ class Dapps {
             const data = await DappsModel.DappHotlist(location,language);
             ctx.body =  new SuccessModel('获取成功',data)
         } catch (err) {
+            console.log(err)
             ctx.body = new ErrorModel(500,'服务器访问出错',null)
         }
     }
@@ -76,10 +77,14 @@ class Dapps {
 
         try {
             if(!keyword){
-                ctx.body = new SuccessModel('获取成功',[])
+                ctx.body = new ErrorModel(401,'暂无数据',[])
                 return;
             }
             const data = await DappsModel.DappsSearchList(keyword,isIndex,location,language);
+            if(data == null || data.length < 1){
+                ctx.body = new ErrorModel(401,'暂无数据',[])
+                return;
+            }
             ctx.body =  new SuccessModel('获取成功',data)
         } catch (err) {
             console.log(err)
