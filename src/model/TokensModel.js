@@ -152,7 +152,7 @@ class DetailModel {
         console.log(address, location, language)
 
         let isLocation = {
-            address:address,
+            address:address?address:('' || null),
             location:{
                 [Op.substring]: location?location:'CN',
             }

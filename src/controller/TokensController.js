@@ -74,10 +74,10 @@ class Tokens {
           let location = ctx.request.header.location;
           let language = ctx.request.header.language;
 
-          if(isNull(address)){
-               ctx.body = new ErrorModel(400,'缺少address字段值',null)
-               return;
-          }
+          // if(isNull(address)){
+          //      ctx.body = new ErrorModel(400,'缺少address字段值',null)
+          //      return;
+          // }
 
           try {
               const data = await TokensModel.FindTokensDetail(address,location,language);
