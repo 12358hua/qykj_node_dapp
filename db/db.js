@@ -15,9 +15,12 @@ console.log(data)
 // data[1], data[2], data[3]
 // npm run dev 3009 HuobiEcoChainMainNet root 12358Hua
 // npm run dev 3008 EthereumMainNet root 12358Hua
-// npm run dev 3009 BoundaryNetwork root 12358Hua
-const sequelize = new Sequelize(data[1], data[2], data[3], {
-    host: '121.43.131.180',
+// npm run dev 3009 BoundaryNetwork root lJHSi*P*yk@DF7Sm
+// 159.138.48.192
+// 121.43.131.180
+// 182.160.7.106
+const sequelize = new Sequelize(data[2], data[3], data[4], {
+    host: data[1],
     dialect: 'mysql',
     operatorsAliases: 0, //0为false,1为true，否则会弹出警告
     dialectOptions: {
