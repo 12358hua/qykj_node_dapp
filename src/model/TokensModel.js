@@ -180,7 +180,7 @@ class DetailModel {
             params = [{
                 "protocol": data.dataValues.protocol,
                 "symbol": data.dataValues.symbol,
-                "address": data.dataValues.address,
+                "address": data.dataValues.address || '',
                 "name": data.dataValues.tokens_blog_language.name,
                 "decimals": data.dataValues.decimals,
                 "logo": data.dataValues.logo,
