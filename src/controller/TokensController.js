@@ -1,9 +1,8 @@
 const TokensModel = require('../model/TokensModel');
 const { SuccessModel, ErrorModel } = require('../../utils/Reslut');
 const { isNull } = require('../../utils/Regular');
-const fs = require('fs')
+// const fs = require('fs')
 const xlsx = require('node-xlsx');
-const cheerio = require('cheerio'); // 则能够对请求结果进行解析，解析方式和jquery的解析方式几乎完全相同 cheerio中文文档 开发参考node - cheerio模块
 const koaRequest = require('koa2-request')
 const {handleDate} = require('../../utils/Packaging')
 const UUID = require('uuid')

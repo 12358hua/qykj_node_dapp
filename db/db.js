@@ -14,11 +14,11 @@ console.log(data)
 // 121.43.131.180  localhost
 // data[1], data[2], data[3],data[4]
 // npm run dev 3009 159.138.48.192 HuobiEcoChainMainNet root 12358Hua
-// npm run dev 3008 159.138.48.192 EthereumMainNet root 12358Hua
-// npm run dev 3009 159.138.48.192 halodatabase root lJHSi*P*yk@DF7Sm
-// 159.138.48.192
+// npm run dev 3008 121.43.131.180 EthereumMainNet root 12345
+// npm run dev 3010 182.160.7.106 halodatabase root lJHSi*P*yk@DF7Sm
+// 159.138.48.192 //服务器ip
 // 121.43.131.180
-// 182.160.7.106
+// 182.160.7.106 数据库ip
 const sequelize = new Sequelize(data[2], data[3], data[4], {
     host: data[1],
     dialect: 'mysql',
