@@ -55,14 +55,13 @@ const Routers = new Router({
  Routers.get('/detail', Tokens.TokensAddress);
 
 /**
- * post
- * 修改状态是否为热门 tokens/updateIndex
- * @params {
- *     id:string  代币id（必须）
- *     hotSort:int  大于1为开启，小于为关闭，不传默认所有状态（必须）
- * }
- * @returns null
+ 读取表格目录文件，获取地址进行数据爬取
  */
-// Routers.post('/updateIndex', Tokens.TokensUpdateIsIndex);
+Routers.post('/postExcelReptile', Tokens.ExcelReptile);
+
+/**
+ 读取表格目录文件，导入指定格式数据
+ */
+Routers.post('/postExcelList', Tokens.postExcelReptile);
 
 module.exports = Routers

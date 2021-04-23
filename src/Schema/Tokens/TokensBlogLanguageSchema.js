@@ -5,6 +5,7 @@ module.exports = function (sequelize, DataTypes) {
         id: {
             type: DataTypes.UUID,
             defaultValue: Sequelize.UUIDV1, // 或 Sequelize.UUIDV1
+            unique: true,
             allowNull: false, //将 allowNull 设置为 false 将为该列添加 NOT NULL
             primaryKey: true, //true继续阅读有关主键的更多信息
         },
@@ -17,6 +18,8 @@ module.exports = function (sequelize, DataTypes) {
         name: {
             type: DataTypes.STRING(255),
             field: 'name', //你可以通过 'field' 属性指定自定义列名称
+            unique: true,
+            primaryKey: true, //true继续阅读有关主键的更多信息
             comment:'名称语言',
         },
         desc: {

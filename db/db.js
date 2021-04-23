@@ -12,10 +12,10 @@ const Sequelize = require('sequelize');
 var data = process.argv.splice(2)
 console.log(data)
 // 121.43.131.180  localhost
-// data[1], data[2], data[3]
-// npm run dev 3009 HuobiEcoChainMainNet root 12358Hua
-// npm run dev 3008 EthereumMainNet root 12358Hua
-// npm run dev 3009 BoundaryNetwork root lJHSi*P*yk@DF7Sm
+// data[1], data[2], data[3],data[4]
+// npm run dev 3009 159.138.48.192 HuobiEcoChainMainNet root 12358Hua
+// npm run dev 3008 159.138.48.192 EthereumMainNet root 12358Hua
+// npm run dev 3009 159.138.48.192 halodatabase root lJHSi*P*yk@DF7Sm
 // 159.138.48.192
 // 121.43.131.180
 // 182.160.7.106

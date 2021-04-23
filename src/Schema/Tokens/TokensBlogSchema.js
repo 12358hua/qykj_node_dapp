@@ -5,6 +5,7 @@ module.exports = function (sequelize, DataTypes) {
         id: {
             type: DataTypes.UUID,
             defaultValue: Sequelize.UUIDV1, // 或 Sequelize.UUIDV1
+            unique: true,
             allowNull: false, //将 allowNull 设置为 false 将为该列添加 NOT NULL
             primaryKey: true, //true继续阅读有关主键的更多信息
         },
@@ -38,7 +39,7 @@ module.exports = function (sequelize, DataTypes) {
         address: {
             type: DataTypes.STRING(255),
             field: 'address',
-            comment:'代币地址'
+            comment:'代币地址',
         },
         decimals: {
             type: DataTypes.INTEGER,
