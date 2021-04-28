@@ -28,6 +28,9 @@ class DetailModel {
             location:{
                 [Op.substring]: location?location:'CN',
             },
+            address:{ //不等于空
+                [Op.not]: '',
+            },
             [Op.or]: [
                 {symbol: { [Op.like]:'%' + keyword + '%' }},
                 {address: { [Op.like]:'%' + keyword + '%' }}

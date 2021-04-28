@@ -61,6 +61,7 @@ Routers.post('/postExcelReptile', Tokens.ExcelReptile);
 
 /**
  读取表格目录文件，导入指定格式数据
+ catalogue=文件地址
  */
 Routers.post('/postExcelList', Tokens.postExcelReptile);
 
