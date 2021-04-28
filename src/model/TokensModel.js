@@ -198,6 +198,7 @@ class DetailModel {
                 "website": data.dataValues.website || '',
                 "state": data.dataValues.state || '',
                 "published_on": data.dataValues.published_on || '',
+                "desc": data.dataValues.tokens_blog_language.desc || '',
                 "links": {
                     "discord": data.dataValues.discord || '',
                     "twitter": data.dataValues.twitter || '',
@@ -205,7 +206,7 @@ class DetailModel {
                 }
             }]
         }
-        console.log(params)
+        // console.log(params)
 
         return params
     }
