@@ -93,7 +93,10 @@ class DetailModel {
                     where: {
                         location:{
                             [Op.substring]: location?location:'CN',
-                        }
+                        },
+                        address:{ //不等于空
+                            [Op.not]: '',
+                        },
                     },
                     attributes: ['protocol','symbol', 'address', 'decimals', 'logo'],
                 }]
