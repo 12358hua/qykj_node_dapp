@@ -117,8 +117,8 @@ class DappsModel{
             attributes: ['image', 'url'],
             where: (location || language)? {
                 [Op.or]: [
-                    { location: location?location:'' },
-                    { language: language?language:'' }
+                    { location: location?location:'zh-cn' },
+                    { language: language?language:'zh-cn' }
                 ]
             }:{}
         })
@@ -155,6 +155,9 @@ class DappsModel{
                 // console.log([CategoryData[i].id])
                 let dataItem = await BlogSchema.findAll({
                     attributes: ['url','logo'],
+                    order: [
+                        ['sort', 'ASC'], // ASC升序 | DESC降序;
+                    ],
                     where: {
                         category_id:{
                             [Op.like]: `%${CategoryData[i].id}`,
