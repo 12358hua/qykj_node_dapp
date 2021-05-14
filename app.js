@@ -8,6 +8,7 @@ const logger = require('koa-logger')
 
 const DappsRouter = require('./routes/DappsRouter')
 const TokensRouter=require('./routes/TokensRouter')
+const NoticeRouter=require('./routes/NoticeRouter')
 
 // error handler
 onerror(app)
@@ -35,6 +36,7 @@ app.use(async (ctx, next) => {
 // routes
 app.use(DappsRouter.routes(), DappsRouter.allowedMethods())
 app.use(TokensRouter.routes(),TokensRouter.allowedMethods())
+app.use(NoticeRouter.routes(),NoticeRouter.allowedMethods())
 
 
 // error-handling
