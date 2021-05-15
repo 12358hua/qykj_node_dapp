@@ -5,6 +5,7 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const cors = require('koa-cors');
 
 const DappsRouter = require('./routes/DappsRouter')
 const TokensRouter=require('./routes/TokensRouter')
@@ -12,6 +13,7 @@ const NoticeRouter=require('./routes/NoticeRouter')
 
 // error handler
 onerror(app)
+app.use(cors());
 
 // middlewares
 app.use(bodyparser({
