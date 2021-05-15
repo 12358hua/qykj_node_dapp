@@ -21,6 +21,11 @@ module.exports = function (sequelize, DataTypes) {
             field: 'content',
             allowNull: false
         },
+        address: {
+            type: DataTypes.STRING(128),
+            field: 'address',
+            allowNull: false
+        },
         sort:{
             type: DataTypes.INTEGER,
             field: 'sort',

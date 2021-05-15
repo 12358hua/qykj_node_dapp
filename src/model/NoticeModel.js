@@ -12,16 +12,32 @@ const { isNull } = require('../../utils/Regular')
 class NoticeModel{
     static async NoticeInsert(params){
         console.log(params)
+        if(params.id){
+            return await NoticeSchema.update({
+                title:params.title,
+                desc:params.desc,
+                content:params.content
+            },{
+                where:{id:params.id}
+            })
+        }
+
         let findTitle = await NoticeSchema.findOne({
             where:{
                 title:params.title
             }
         })
+
         if(findTitle != null){
             return []
         }
 
-        return await NoticeSchema.create(params)
+        return await NoticeSchema.create({
+            title:params.title,
+            desc:params.desc,
+            content:params.content,
+            address:params.address
+        })
     }
 
 

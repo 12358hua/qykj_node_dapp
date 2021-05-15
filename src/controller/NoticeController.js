@@ -1,19 +1,47 @@
 const NoticeModel = require('../model/NoticeModel');
 const { SuccessModel, ErrorModel } = require('../../utils/Reslut');
+const secret = require('../../utils/sign.json');
+const ethSigUtil = require('eth-sig-util');
 
 class Notice {
     static
     async NoticeInsert(ctx){
-        let params = ctx.request.body;
-        if(!params.title){
+        let query = ctx.request.body;
+        let bodyData = JSON.parse(query.params)
+
+        if(!bodyData.title){
             ctx.body =  new SuccessModel(400,'标题不能为空',null)
             return;
-        }else if(!params.content){
+        }else if(!bodyData.content){
             ctx.body =  new SuccessModel(400,'内容不能为空',null)
+            return;
+        }else if(!bodyData.sign){
+            ctx.body =  new SuccessModel(400,'签名不能为空',null)
+            return;
+        }
+
+        // 解密后的地址
+        const response = ethSigUtil.recoverTypedSignatureLegacy({
+            data: bodyData.signContent,
+            sig: bodyData.sign
+        })
+
+        // 是否是指定的地址
+        let address = secret.sign.filter(item=> item.toLowerCase() === response.toLowerCase())
+
+        if(address.length < 1){
+            ctx.body =  new SuccessModel(400,'无操作权限',null)
             return;
         }
 
         try{
+            let params = {
+                id:bodyData.id,
+                title:bodyData.title,
+                desc:bodyData.desc,
+                content:bodyData.content,
+                address:response,
+            }
             const data = await NoticeModel.NoticeInsert(params);
             if(data.length < 1){
                 ctx.body =  new SuccessModel(400,'公告标题已存在',null)
