@@ -31,6 +31,7 @@ class Dapps {
             const data = await DappsModel.findAllDappsList(location,language);
             ctx.body =  new SuccessModel('获取成功',data)
         } catch (err) {
+            console.log(err)
             ctx.body = new ErrorModel(500,'服务器访问出错',null)
         }
     }

@@ -337,7 +337,7 @@ const languageForPush = function(data){
             symbol:data[k].symbol?data[k].symbol:data[k].tokens_blog.symbol,
             address:data[k].address?data[k].address:data[k].tokens_blog.address,
             name:data[k].name?data[k].name:data[k].tokens_blog_language.name,
-            decimals:data[k].decimals?data[k].decimals:data[k].tokens_blog.decimals,
+            decimals:data[k].decimals != null?data[k].decimals:data[k].tokens_blog.decimals,
             logo:data[k].logo?data[k].logo:data[k].tokens_blog.logo,
         })
     }

@@ -4,6 +4,7 @@ const db = require('../../db/db')
 const Sequelize = db.sequelize
 
 const BannerSchema = Sequelize.import('../Schema/Dapps/BannerSchema.js')
+// const BannerSchema = require("../Schema/Dapps/BannerSchema.js")(Sequelize, seq.DataTypes); // 新版本写法
 
 const BlogSchema = Sequelize.import('../Schema/Dapps/BlogSchema.js')
 const BlogLanguageSchema = Sequelize.import('../Schema/Dapps/BlogLanguageSchema.js')
@@ -117,11 +118,12 @@ class DappsModel{
             attributes: ['image', 'url'],
             where: (location || language)? {
                 [Op.or]: [
-                    { location: location?location:'zh-cn' },
+                    { location: location?location:'cn' },
                     { language: language?language:'zh-cn' }
                 ]
             }:{}
         })
+        console.log(BannerData)
 
         DappsCategorySchema.belongsTo(CategoryLanguageSchema, {foreignKey: 'identifier', targetKey: 'category_id' });
         let CategoryData = await DappsCategorySchema.findAll({
