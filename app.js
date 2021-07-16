@@ -16,9 +16,9 @@ onerror(app)
 // app.use(cors());
 app.use(cors({
   origin: function(ctx) {
-    if (ctx.url === '/test') {
-      return false;
-    }
+    // if (ctx.url === '/test') {
+    //   return false;
+    // }
     return '*';
   },
   maxAge: 5, //指定本次预检请求的有效期，单位为秒。
