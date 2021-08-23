@@ -55,14 +55,16 @@ const Routers = new Router({
  Routers.get('/detail', Tokens.TokensAddress);
 
 /**
+ * 仅开发环境使用
  读取表格目录文件，获取地址进行数据爬取
  */
-Routers.post('/postExcelReptile', Tokens.ExcelReptile);
+// Routers.post('/postExcelReptile', Tokens.ExcelReptile);
 
 /**
+ * 仅开发环境使用
  读取表格目录文件，导入指定格式数据
  catalogue=文件地址
  */
-Routers.post('/postExcelList', Tokens.postExcelReptile);
+// Routers.post('/postExcelList', Tokens.postExcelReptile);
 
 module.exports = Routers
